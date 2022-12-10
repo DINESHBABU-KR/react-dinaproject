@@ -5,17 +5,19 @@ const TableHead = () => {
       <tr>
         <th scope="col">First</th>
         <th scope="col">job</th>
+        <th scope="col">action</th>
       </tr>
     </thead>
   );
 };
 const TableBody = (props) => {
-  const { characterData } = props;
-  const row = characterData.map((character, index) => {
+  const { charactersData, remove } = props;
+  const row = charactersData.map((characte, index) => {
     return (
       <tr key={index}>
-        <td>{character.name}</td>
-        <td>{character.job}</td>
+        <td>{characte.name}</td>
+        <td>{characte.job}</td>
+        <td><button onClick={()=>remove(index)}>delete</button></td>
       </tr>
     );
   });
@@ -24,11 +26,11 @@ const TableBody = (props) => {
 
 class Table extends Component {
   render() {
-    const { characterData } = this.props;
+    const { characterData, remove } = this.props;
     return (
-      <table class="table table-striped">
+      <table class="table">
         <TableHead />
-        <TableBody characterData={characterData} />
+        <TableBody remove={remove} charactersData={characterData} />
       </table>
     );
   }
